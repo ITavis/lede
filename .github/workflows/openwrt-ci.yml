@@ -59,7 +59,8 @@ jobs:
       - name: 同步最新的源码
         run: |
           git remote add openwrt https://github.com/coolsnowwolf/lede.git
-          git pull openwrt master
+          # git pull openwrt master
+          git config pull.rebase false
           git remote -v
           
       - name: 涡轮增雕进程
