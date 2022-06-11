@@ -56,14 +56,14 @@ jobs:
           sudo -E apt-get -y autoremove --purge
           sudo -E apt-get clean
 
-      - name: 同步最新的源码
+      - name: 更新源码
         run: |
           git remote add openwrt https://github.com/coolsnowwolf/lede.git
           # git pull openwrt master
           git config pull.rebase false
           git remote -v
           
-      - name: 涡轮增雕进程
+      - name: 主题atmateria
         run: |
           cd package
           mkdir openwrt-packages
@@ -83,14 +83,9 @@ jobs:
           #
           # ========================固件定制部分========================
           # 
-
-          # 
           # 如果不对本区块做出任何编辑, 则生成默认配置固件. 
           # 
-
           # 以下为定制化固件选项和说明:
-          #
-
           #
           # 有些插件/选项是默认开启的, 如果想要关闭, 请参照以下示例进行编写:
           # 
@@ -100,8 +95,6 @@ jobs:
           #         |  # CONFIG_VMDK_IMAGES is not set        |
           #         |  EOF                                    |
           #          =========================================
-          #
-
           # 
           # 以下是一些提前准备好的一些插件选项.
           # 直接取消注释相应代码块即可应用. 不要取消注释代码块上的汉字说明.
@@ -122,7 +115,7 @@ jobs:
 
           # 编译小米3g固件:
           cat >> .config <<EOF
-          CONFIG_TARGET_ramips=y
+          # CONFIG_TARGET_ramips=y
           CONFIG_TARGET_ramips_mt7621=y
           CONFIG_TARGET_ramips_mt7621_DEVICE_xiaomi_mi-router-cr6608=y
           CONFIG_TARGET_BOARD="ramips"
@@ -164,17 +157,17 @@ jobs:
           # EOF
 
           # 常用LuCI插件选择:
-          # cat >> .config <<EOF
+           cat >> .config <<EOF
           # CONFIG_PACKAGE_luci-app-adbyby-plus=y
-          # CONFIG_PACKAGE_luci-app-aria2=y
-          # CONFIG_PACKAGE_luci-app-baidupcs-web=y
+           CONFIG_PACKAGE_luci-app-aria2=y
+           CONFIG_PACKAGE_luci-app-baidupcs-web=y
           # CONFIG_PACKAGE_luci-app-docker=y
           # CONFIG_PACKAGE_luci-app-frpc=y
           # CONFIG_PACKAGE_luci-app-hd-idle=y
           # CONFIG_PACKAGE_luci-app-kodexplorer=y
           # CONFIG_PACKAGE_luci-app-minidlna=y
-          # CONFIG_PACKAGE_luci-app-openvpn=y
-          # CONFIG_PACKAGE_luci-app-openvpn-server=y
+           CONFIG_PACKAGE_luci-app-openvpn=y
+           CONFIG_PACKAGE_luci-app-openvpn-server=y
           # CONFIG_PACKAGE_luci-app-qbittorrent=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
@@ -187,7 +180,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-webadmin=y
           # CONFIG_PACKAGE_luci-app-wireguard=y
           # CONFIG_PACKAGE_luci-app-wrtbwmon=y
-          # EOF
+           EOF
 
           # LuCI主题:
           cat >> .config <<EOF
